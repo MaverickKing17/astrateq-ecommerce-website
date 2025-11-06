@@ -608,6 +608,303 @@ const AstrateqEcommerce = () => {
     </div>
   );
 
+  const ProductsPage = () => (
+    <div className="min-h-screen bg-gray-50 py-12 px-4">
+      <div className="max-w-6xl mx-auto">
+        <h1 className="text-5xl font-bold mb-4 text-[#1A1D23]">All Products</h1>
+        <p className="text-xl text-gray-600 mb-12">Discover our complete range of AI-powered automotive safety solutions</p>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {products.map(product => (
+            <div key={product.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+              <div className="bg-[#1A1D23] text-white p-12 text-center text-6xl">
+                {product.image}
+              </div>
+              <div className="p-6">
+                <div className="text-xs font-semibold text-[#00D9FF] mb-2 uppercase tracking-wider">{product.category}</div>
+                <h3 className="text-xl font-bold mb-2 text-[#1A1D23]">{product.name}</h3>
+                <p className="text-gray-600 text-sm font-semibold mb-3">{product.tagline}</p>
+                <p className="text-gray-600 mb-4 text-sm leading-relaxed">{product.description}</p>
+                
+                <div className="mb-4">
+                  <div className="text-xs text-gray-500 mb-2">Key Features:</div>
+                  <ul className="space-y-1">
+                    {product.features.slice(0, 2).map((feature, idx) => (
+                      <li key={idx} className="text-sm text-gray-700 flex items-start gap-2">
+                        <Check className="text-[#00C896] flex-shrink-0" size={16} />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="flex justify-between items-center pt-4 border-t border-gray-200">
+                  <span className="text-2xl font-bold text-[#1A1D23]">${product.price}</span>
+                  <button 
+                    onClick={() => setCurrentPage('product-' + product.id)}
+                    className="bg-[#00D9FF] hover:bg-[#0099CC] text-white px-6 py-2 rounded-lg font-semibold transition-colors"
+                  >
+                    Learn More
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+
+  const ProductDetailPage = ({ productId }) => {
+    const product = products.find(p => p.id === productId);
+    
+    return (
+      <div className="min-h-screen bg-gray-50 py-12 px-4">
+        <div className="max-w-6xl mx-auto">
+          <button 
+            onClick={() => setCurrentPage('products')}
+            className="text-[#00D9FF] hover:text-[#0099CC] mb-8 inline-flex items-center gap-2"
+          >
+            ← Back to Products
+          </button>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
+            <div className="bg-white rounded-lg shadow-lg p-12 flex items-center justify-center">
+              <div className="text-9xl">{product.image}</div>
+            </div>
+
+            <div>
+              <div className="text-sm font-semibold text-[#00D9FF] mb-2 uppercase tracking-wider">{product.category}</div>
+              <h1 className="text-4xl font-bold mb-4 text-[#1A1D23]">{product.name}</h1>
+              <p className="text-2xl text-gray-600 mb-6 italic">{product.tagline}</p>
+              <p className="text-lg text-gray-700 mb-6 leading-relaxed">{product.description}</p>
+              
+              <div className="bg-gray-50 p-6 rounded-lg mb-6">
+                <div className="text-4xl font-bold text-[#1A1D23] mb-2">${product.price}</div>
+                <div className="text-sm text-gray-600 mb-4">One-time purchase • Lifetime warranty included</div>
+                <button 
+                  onClick={() => addToCart(product)}
+                  className="w-full bg-[#00C896] hover:bg-[#00b386] text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all transform hover:scale-105 uppercase tracking-wide"
+                >
+                  Add to Cart
+                </button>
+              </div>
+
+              <div className="flex gap-4 text-sm">
+                <div className="flex items-center gap-2 text-gray-700">
+                  <Check className="text-[#00C896]" size={20} />
+                  <span>60-Day Money Back Guarantee</span>
+                </div>
+                <div className="flex items-center gap-2 text-gray-700">
+                  <Check className="text-[#00C896]" size={20} />
+                  <span>Free Shipping</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Features Section */}
+          <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
+            <h2 className="text-3xl font-bold mb-6 text-[#1A1D23]">Key Features</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {product.features.map((feature, idx) => (
+                <div key={idx} className="flex items-start gap-3">
+                  <Check className="text-[#00C896] flex-shrink-0 mt-1" size={24} />
+                  <div>
+                    <p className="text-gray-800 font-medium">{feature}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Specifications */}
+          <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
+            <h2 className="text-3xl font-bold mb-6 text-[#1A1D23]">Technical Specifications</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {Object.entries(product.specs).map(([key, value]) => (
+                <div key={key} className="border-b border-gray-200 pb-4">
+                  <div className="text-sm text-gray-600 uppercase tracking-wider mb-1">
+                    {key.replace(/([A-Z])/g, ' $1').trim()}
+                  </div>
+                  <div className="text-lg font-semibold text-[#1A1D23]">{value}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* USP Section */}
+          <div className="bg-gradient-to-br from-[#1A1D23] to-[#2D3338] rounded-lg shadow-lg p-8 text-white">
+            <h2 className="text-3xl font-bold mb-4">Why Choose {product.name}?</h2>
+            <p className="text-xl leading-relaxed text-gray-300">{product.usps}</p>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const AboutPage = () => (
+    <div className="min-h-screen bg-gray-50">
+      {/* Hero */}
+      <section className="bg-gradient-to-br from-[#1A1D23] to-[#2D3338] text-white py-20 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-5xl font-bold mb-6">Redefining Automotive Safety</h1>
+          <p className="text-2xl text-gray-300 leading-relaxed">
+            To create a future where every journey is proactively protected, intelligent, and completely secure through the power of advanced AI.
+          </p>
+        </div>
+      </section>
+
+      {/* Mission & Vision */}
+      <section className="py-20 px-4 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div className="bg-gray-50 p-8 rounded-lg">
+              <h2 className="text-3xl font-bold mb-4 text-[#1A1D23]">Our Vision</h2>
+              <p className="text-gray-700 leading-relaxed text-lg">
+                To be the industry standard for AI-enabled vehicular protection that transforms uncertainty into absolute confidence. We envision a world where every driver has access to predictive intelligence that makes roads safer for everyone.
+              </p>
+            </div>
+            <div className="bg-gray-50 p-8 rounded-lg">
+              <h2 className="text-3xl font-bold mb-4 text-[#1A1D23]">Our Mission</h2>
+              <p className="text-gray-700 leading-relaxed text-lg">
+                To engineer and deliver cutting-edge, AI-powered automotive solutions that provide unparalleled precision, predictive capabilities, and proactive safety features, empowering drivers with a 'sixth sense' for the road.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Core Values */}
+      <section className="py-20 px-4 bg-gray-50">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-12 text-[#1A1D23]">Our Core Values</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white p-8 rounded-lg shadow-lg">
+              <div className="w-12 h-12 bg-[#00D9FF] rounded-full flex items-center justify-center mb-4">
+                <Zap className="text-white" size={24} />
+              </div>
+              <h3 className="text-xl font-bold mb-3 text-[#1A1D23]">Intelligence</h3>
+              <p className="text-gray-600 leading-relaxed">AI-driven solutions form the foundation of everything we create.</p>
+            </div>
+            <div className="bg-white p-8 rounded-lg shadow-lg">
+              <div className="w-12 h-12 bg-[#00D9FF] rounded-full flex items-center justify-center mb-4">
+                <Check className="text-white" size={24} />
+              </div>
+              <h3 className="text-xl font-bold mb-3 text-[#1A1D23]">Precision</h3>
+              <p className="text-gray-600 leading-relaxed">Accurate, reliable, and timely insights you can depend on.</p>
+            </div>
+            <div className="bg-white p-8 rounded-lg shadow-lg">
+              <div className="w-12 h-12 bg-[#00D9FF] rounded-full flex items-center justify-center mb-4">
+                <Shield className="text-white" size={24} />
+              </div>
+              <h3 className="text-xl font-bold mb-3 text-[#1A1D23]">Trust</h3>
+              <p className="text-gray-600 leading-relaxed">Consistent, proven safety that builds confidence over time.</p>
+            </div>
+            <div className="bg-white p-8 rounded-lg shadow-lg">
+              <div className="w-12 h-12 bg-[#00D9FF] rounded-full flex items-center justify-center mb-4">
+                <TrendingUp className="text-white" size={24} />
+              </div>
+              <h3 className="text-xl font-bold mb-3 text-[#1A1D23]">Proactive Safety</h3>
+              <p className="text-gray-600 leading-relaxed">Prevention over reaction, foresight over response.</p>
+            </div>
+            <div className="bg-white p-8 rounded-lg shadow-lg">
+              <div className="w-12 h-12 bg-[#00D9FF] rounded-full flex items-center justify-center mb-4">
+                <Zap className="text-white" size={24} />
+              </div>
+              <h3 className="text-xl font-bold mb-3 text-[#1A1D23]">Innovation</h3>
+              <p className="text-gray-600 leading-relaxed">Continuously advancing automotive AI capabilities.</p>
+            </div>
+            <div className="bg-white p-8 rounded-lg shadow-lg">
+              <div className="w-12 h-12 bg-[#00D9FF] rounded-full flex items-center justify-center mb-4">
+                <Users className="text-white" size={24} />
+              </div>
+              <h3 className="text-xl font-bold mb-3 text-[#1A1D23]">Empowerment</h3>
+              <p className="text-gray-600 leading-relaxed">Putting control and understanding in drivers' hands.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* The Difference */}
+      <section className="py-20 px-4 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-4 text-[#1A1D23]">The Astrateq Difference</h2>
+          <p className="text-center text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
+            Unlike reactive dash cams or restrictive OEM systems, Astrateq provides aftermarket flexibility with enterprise-grade AI, delivering predictive insights in a premium consumer experience.
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="text-center">
+              <div className="bg-gray-100 p-6 rounded-lg mb-4">
+                <div className="text-sm font-semibold text-gray-500 mb-2">Traditional Dash Cams</div>
+                <div className="text-red-500 font-bold">Reactive</div>
+              </div>
+              <p className="text-sm text-gray-600">Post-incident recording only</p>
+            </div>
+            <div className="text-center">
+              <div className="bg-gray-100 p-6 rounded-lg mb-4">
+                <div className="text-sm font-semibold text-gray-500 mb-2">OEM Safety Systems</div>
+                <div className="text-red-500 font-bold">Limited</div>
+              </div>
+              <p className="text-sm text-gray-600">Built-in restrictions</p>
+            </div>
+            <div className="text-center">
+              <div className="bg-gray-100 p-6 rounded-lg mb-4">
+                <div className="text-sm font-semibold text-gray-500 mb-2">Generic Telematics</div>
+                <div className="text-red-500 font-bold">Complex</div>
+              </div>
+              <p className="text-sm text-gray-600">Enterprise-only, subscription lock-in</p>
+            </div>
+            <div className="text-center">
+              <div className="bg-[#00D9FF] p-6 rounded-lg mb-4">
+                <div className="text-sm font-semibold text-white mb-2">Astrateq Gadgets</div>
+                <div className="text-white font-bold">Proactive</div>
+              </div>
+              <p className="text-sm text-gray-800 font-semibold">Predictive AI + Universal compatibility</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Timeline */}
+      <section className="py-20 px-4 bg-gray-50">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-12 text-[#1A1D23]">Our Journey Forward</h2>
+          <div className="space-y-8">
+            <div className="flex gap-6 items-start">
+              <div className="bg-[#00D9FF] text-white rounded-full w-16 h-16 flex items-center justify-center flex-shrink-0 font-bold text-lg">
+                2025
+              </div>
+              <div className="flex-1 bg-white p-6 rounded-lg shadow">
+                <h3 className="text-xl font-bold mb-2 text-[#1A1D23]">Foundation</h3>
+                <p className="text-gray-600">Establishing premium positioning in aftermarket AI safety, building trust through proven accuracy and transparency.</p>
+              </div>
+            </div>
+            <div className="flex gap-6 items-start">
+              <div className="bg-[#00D9FF] text-white rounded-full w-16 h-16 flex items-center justify-center flex-shrink-0 font-bold text-lg">
+                2026
+              </div>
+              <div className="flex-1 bg-white p-6 rounded-lg shadow">
+                <h3 className="text-xl font-bold mb-2 text-[#1A1D23]">Expansion</h3>
+                <p className="text-gray-600">AI insurance partnerships, B2B enterprise portal, international markets, and advanced subscription features.</p>
+              </div>
+            </div>
+            <div className="flex gap-6 items-start">
+              <div className="bg-[#00D9FF] text-white rounded-full w-16 h-16 flex items-center justify-center flex-shrink-0 font-bold text-lg">
+                2028+
+              </div>
+              <div className="flex-1 bg-white p-6 rounded-lg shadow">
+                <h3 className="text-xl font-bold mb-2 text-[#1A1D23]">Ecosystem</h3>
+                <p className="text-gray-600">Open API platform, OEM partnerships, vehicle-to-vehicle AI communication, and autonomous vehicle preparation.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+
   const ContactPage = () => {
     const [formData, setFormData] = useState({
       name: '',
