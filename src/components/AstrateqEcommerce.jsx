@@ -361,6 +361,20 @@ const AstrateqEcommerce = () => {
   const ProductDetailPage = ({ productId }) => {
     const product = products.find(p => p.id === productId);
     
+    if (!product) {
+      return (
+        <div className="min-h-screen bg-gray-50 py-12 px-4 text-center">
+          <h1 className="text-4xl font-bold text-red-500 mb-4">Product Not Found</h1>
+          <button 
+            onClick={() => setCurrentPage('products')}
+            className="text-[#00D9FF] hover:text-[#0099CC] underline"
+          >
+            Go back to the Products page
+          </button>
+        </div>
+      );
+    }
+
     return (
       <div className="min-h-screen bg-gray-50 py-12 px-4">
         <div className="max-w-6xl mx-auto">
@@ -864,11 +878,11 @@ const AstrateqEcommerce = () => {
           <div>
             <h4 className="font-semibold mb-4">Products</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="text-gray-400 hover:text-[#00D9FF]">Driver Coach</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-[#00D9FF]">Predictive Maintenance</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-[#00D9FF]">Emergency AI</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-[#00D9FF]">EV Suite</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-[#00D9FF]">Fleet Solutions</a></li>
+              <li><button onClick={() => setCurrentPage('product-1')} className="text-gray-400 hover:text-[#00D9FF]">Driver Coach</button></li>
+              <li><button onClick={() => setCurrentPage('product-2')} className="text-gray-400 hover:text-[#00D9FF]">Predictive Maintenance</button></li>
+              <li><button onClick={() => setCurrentPage('product-3')} className="text-gray-400 hover:text-[#00D9FF]">Emergency AI</button></li>
+              <li><button onClick={() => setCurrentPage('product-4')} className="text-gray-400 hover:text-[#00D9FF]">EV Suite</button></li>
+              <li><button onClick={() => setCurrentPage('product-5')} className="text-gray-400 hover:text-[#00D9FF]">Fleet Solutions</button></li>
             </ul>
           </div>
 
