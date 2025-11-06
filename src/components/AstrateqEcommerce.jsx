@@ -157,8 +157,150 @@ const AstrateqEcommerce = () => {
             </div>
           </div>
 
-          {/* Trust Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+          {/* Trust Stats - MOVED CORRECTLY FROM END OF FILE */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mt-16">
+            <div className="text-center p-6 bg-[#2D3338] rounded-lg">
+              <div className="text-4xl font-bold text-[#00D9FF] mb-2">94%</div>
+              <div className="text-gray-300">Failure Prediction Accuracy</div>
+            </div>
+            <div className="text-center p-6 bg-[#2D3338] rounded-lg">
+              <div className="text-4xl font-bold text-[#00D9FF] mb-2">40%</div>
+              <div className="text-gray-300">Accident Risk Reduction</div>
+            </div>
+            <div className="text-center p-6 bg-[#2D3338] rounded-lg">
+              <div className="text-4xl font-bold text-[#00D9FF] mb-2">3-6</div>
+              <div className="text-gray-300">Weeks Advance Warning</div>
+            </div>
+            <div className="text-center p-6 bg-gray-50 rounded-lg">
+              <Check className="text-[#00C896] mx-auto mb-2" size={32} />
+              <p className="font-semibold text-[#1A1D23]">24/7 Expert Support</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Messaging Pillars - MOVED CORRECTLY FROM END OF FILE */}
+      <section className="py-20 px-4 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-[#00D9FF] rounded-full flex items-center justify-center mx-auto mb-6">
+                <Zap className="text-white" size={32} />
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-[#1A1D23]">Intelligent AI</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Our advanced algorithms analyze thousands of data points to provide real-time driver coaching and vehicle health monitoring.
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-[#00D9FF] rounded-full flex items-center justify-center mx-auto mb-6">
+                <TrendingUp className="text-white" size={32} />
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-[#1A1D23]">Predictive Insights</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Using cutting-edge machine learning, we forecast maintenance needs weeks in advance, saving you time and costly repairs.
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-[#00D9FF] rounded-full flex items-center justify-center mx-auto mb-6">
+                <Shield className="text-white" size={32} />
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-[#1A1D23]">Proactive Protection</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Move beyond reactive safety. Our systems intervene before problems arise, giving you a new 'sixth sense' on the road.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Products - REMAINS IN PLACE */}
+      <section className="py-20 px-4 bg-gray-50">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-4 text-[#1A1D23]">Featured Products</h2>
+          <p className="text-center text-gray-600 mb-12 text-lg">Explore our AI-powered automotive safety solutions</p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {products.slice(0, 3).map(product => (
+              <div key={product.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                <div className="bg-[#1A1D23] text-white p-12 text-center text-6xl">
+                  {product.image}
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-2 text-[#1A1D23]">{product.name}</h3>
+                  <p className="text-[#00D9FF] text-sm font-semibold mb-3">{product.tagline}</p>
+                  <p className="text-gray-600 mb-4 text-sm leading-relaxed">{product.description}</p>
+                  <div className="flex justify-between items-center">
+                    <span className="text-2xl font-bold text-[#1A1D23]">${product.price}</span>
+                    <button 
+                      onClick={() => {
+                        setCurrentPage('product-' + product.id);
+                      }}
+                      className="bg-[#00D9FF] hover:bg-[#0099CC] text-white px-6 py-2 rounded-lg font-semibold transition-colors"
+                    >
+                      View Details
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <button 
+              onClick={() => setCurrentPage('products')}
+              className="bg-[#1A1D23] hover:bg-[#2D3338] text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors inline-flex items-center gap-2"
+            >
+              View All Products <ChevronRight size={20} />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Trust Section - REMAINS IN PLACE */}
+      <section className="py-20 px-4 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-12 text-[#1A1D23]">Trusted by Thousands</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <div className="bg-gray-50 p-8 rounded-lg">
+              <div className="flex items-center mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="text-[#FFB020] fill-current" size={20} />
+                ))}
+              </div>
+              <p className="text-gray-700 mb-4 italic leading-relaxed">
+                "The ASTRA-PREDICT system saved me over $3,000 in emergency repairs. It alerted me about a potential transmission issue three weeks before it would have failed. Absolutely worth every penny."
+              </p>
+              <p className="font-semibold text-[#1A1D23]">— Michael T., California</p>
+            </div>
+            
+            <div className="bg-gray-50 p-8 rounded-lg">
+              <div className="flex items-center mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="text-[#FFB020] fill-current" size={20} />
+                ))}
+              </div>
+              <p className="text-gray-700 mb-4 italic leading-relaxed">
+                "As a fleet manager, ASTRA-INSIGHT has reduced our maintenance costs by 32% and virtually eliminated unexpected breakdowns. The ROI was clear within the first quarter."
+              </p>
+              <p className="font-semibold text-[#1A1D23]">— Sarah K., Fleet Manager</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="text-center p-6 bg-gray-50 rounded-lg">
+              <Check className="text-[#00C896] mx-auto mb-2" size={32} />
+              <p className="font-semibold text-[#1A1D23]">Certified Safety-First AI</p>
+            </div>
+            <div className="text-center p-6 bg-gray-50 rounded-lg">
+              <Check className="text-[#00C896] mx-auto mb-2" size={32} />
+              <p className="font-semibold text-[#1A1D23]">60-Day Money Back</p>
+            </div>
+            <div className="text-center p-6 bg-gray-50 rounded-lg">
+              <Check className="text-[#00C896] mx-auto mb-2" size={32} />
+              <p className="font-semibold text-[#1A1D23]">Lifetime Warranty</p>
+            </div>
             <div className="text-center p-6 bg-gray-50 rounded-lg">
               <Check className="text-[#00C896] mx-auto mb-2" size={32} />
               <p className="font-semibold text-[#1A1D23]">24/7 Expert Support</p>
@@ -785,142 +927,4 @@ const AstrateqEcommerce = () => {
   );
 };
 
-export default AstrateqEcommerce;-[#2D3338] rounded-lg">
-              <div className="text-4xl font-bold text-[#00D9FF] mb-2">94%</div>
-              <div className="text-gray-300">Failure Prediction Accuracy</div>
-            </div>
-            <div className="text-center p-6 bg-[#2D3338] rounded-lg">
-              <div className="text-4xl font-bold text-[#00D9FF] mb-2">40%</div>
-              <div className="text-gray-300">Accident Risk Reduction</div>
-            </div>
-            <div className="text-center p-6 bg-[#2D3338] rounded-lg">
-              <div className="text-4xl font-bold text-[#00D9FF] mb-2">3-6</div>
-              <div className="text-gray-300">Weeks Advance Warning</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Messaging Pillars */}
-      <section className="py-20 px-4 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-[#00D9FF] rounded-full flex items-center justify-center mx-auto mb-6">
-                <Zap className="text-white" size={32} />
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-[#1A1D23]">Intelligent AI</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Our advanced algorithms analyze thousands of data points to provide real-time driver coaching and vehicle health monitoring.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-[#00D9FF] rounded-full flex items-center justify-center mx-auto mb-6">
-                <TrendingUp className="text-white" size={32} />
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-[#1A1D23]">Predictive Insights</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Using cutting-edge machine learning, we forecast maintenance needs weeks in advance, saving you time and costly repairs.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-[#00D9FF] rounded-full flex items-center justify-center mx-auto mb-6">
-                <Shield className="text-white" size={32} />
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-[#1A1D23]">Proactive Protection</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Move beyond reactive safety. Our systems intervene before problems arise, giving you a new 'sixth sense' on the road.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Products */}
-      <section className="py-20 px-4 bg-gray-50">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-4 text-[#1A1D23]">Featured Products</h2>
-          <p className="text-center text-gray-600 mb-12 text-lg">Explore our AI-powered automotive safety solutions</p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {products.slice(0, 3).map(product => (
-              <div key={product.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                <div className="bg-[#1A1D23] text-white p-12 text-center text-6xl">
-                  {product.image}
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2 text-[#1A1D23]">{product.name}</h3>
-                  <p className="text-[#00D9FF] text-sm font-semibold mb-3">{product.tagline}</p>
-                  <p className="text-gray-600 mb-4 text-sm leading-relaxed">{product.description}</p>
-                  <div className="flex justify-between items-center">
-                    <span className="text-2xl font-bold text-[#1A1D23]">${product.price}</span>
-                    <button 
-                      onClick={() => {
-                        setCurrentPage('product-' + product.id);
-                      }}
-                      className="bg-[#00D9FF] hover:bg-[#0099CC] text-white px-6 py-2 rounded-lg font-semibold transition-colors"
-                    >
-                      View Details
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <button 
-              onClick={() => setCurrentPage('products')}
-              className="bg-[#1A1D23] hover:bg-[#2D3338] text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors inline-flex items-center gap-2"
-            >
-              View All Products <ChevronRight size={20} />
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Trust Section */}
-      <section className="py-20 px-4 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-12 text-[#1A1D23]">Trusted by Thousands</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            <div className="bg-gray-50 p-8 rounded-lg">
-              <div className="flex items-center mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="text-[#FFB020] fill-current" size={20} />
-                ))}
-              </div>
-              <p className="text-gray-700 mb-4 italic leading-relaxed">
-                "The ASTRA-PREDICT system saved me over $3,000 in emergency repairs. It alerted me about a potential transmission issue three weeks before it would have failed. Absolutely worth every penny."
-              </p>
-              <p className="font-semibold text-[#1A1D23]">— Michael T., California</p>
-            </div>
-            
-            <div className="bg-gray-50 p-8 rounded-lg">
-              <div className="flex items-center mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="text-[#FFB020] fill-current" size={20} />
-                ))}
-              </div>
-              <p className="text-gray-700 mb-4 italic leading-relaxed">
-                "As a fleet manager, ASTRA-INSIGHT has reduced our maintenance costs by 32% and virtually eliminated unexpected breakdowns. The ROI was clear within the first quarter."
-              </p>
-              <p className="font-semibold text-[#1A1D23]">— Sarah K., Fleet Manager</p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="text-center p-6 bg-gray-50 rounded-lg">
-              <Check className="text-[#00C896] mx-auto mb-2" size={32} />
-              <p className="font-semibold text-[#1A1D23]">Certified Safety-First AI</p>
-            </div>
-            <div className="text-center p-6 bg-gray-50 rounded-lg">
-              <Check className="text-[#00C896] mx-auto mb-2" size={32} />
-              <p className="font-semibold text-[#1A1D23]">60-Day Money Back</p>
-            </div>
-            <div className="text-center p-6 bg-gray-50 rounded-lg">
-              <Check className="text-[#00C896] mx-auto mb-2" size={32} />
-              <p className="font-semibold text-[#1A1D23]">Lifetime Warranty</p>
-            </div>
-            <div className="text-center p-6 bg
+export default AstrateqEcommerce;
