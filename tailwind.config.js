@@ -1,4 +1,3 @@
-/** @type {import('tailwindcss').Config} */
 export default {
   content: [
     "./index.html",
@@ -7,7 +6,6 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Astrateq Brand Colors
         'midnight-charcoal': '#1A1D23',
         'slate-grey': '#2D3338',
         'electric-cyan': '#00D9FF',
